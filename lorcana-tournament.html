@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Lorcana Tournament Manager | Heather Doerschuk</title>
+    <meta name="description" content="A Python and SQLite web app for running my own Disney Lorcana tournaments: Swiss pairings, best-of-3 results, standings, a top cut bracket and a projector timer.">
+    <meta name="author" content="Heather Doerschuk">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        /* Project page: same look as lorcana-meta.html (site fonts, teal accent #0CDDDD) */
+        .project { background: #FFFFFF; color: #4f4f4f; padding: 6rem 0 9rem; }
+        .project .row { max-width: 900px; }
+        .project-back { font-family: "montserrat-medium", sans-serif; font-size: 1.4rem; text-transform: uppercase; letter-spacing: .2rem; }
+        .project-back a { color: #111111; border-bottom: 2px solid #0CDDDD; }
+        .project h1 { margin-top: 3rem; margin-bottom: 1.2rem; color: #000000; }
+        .project .lead { font-size: 2rem; line-height: 1.6; color: #4f4f4f; margin-bottom: 3rem; }
+        .facts { display: flex; flex-wrap: wrap; gap: 1.2rem 3.6rem; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; padding: 2rem 0; margin-bottom: 4rem; }
+        .facts div { min-width: 14rem; }
+        .facts h5 { margin: 0 0 .4rem; font-size: 1.2rem; letter-spacing: .2rem; text-transform: uppercase; color: #828282; }
+        .facts p { margin: 0; font-family: "montserrat-medium", sans-serif; font-size: 1.6rem; color: #111111; line-height: 1.5; }
+        .demo { margin: 0 0 1rem; border: 1px solid #e6e6e6; background: #f4f1ea; }
+        .demo video { display: block; width: 100%; height: auto; }
+        .caption { font-size: 1.4rem; color: #757575; line-height: 1.6; margin-bottom: 5rem; }
+        .sample-note { display: inline-block; font-size: 1.3rem; background: #e6fbfb; color: #0a6e6e; padding: .4rem 1.2rem; border-radius: 99px; margin-bottom: 4rem; }
+        .project h2 { color: #000000; margin-top: 4rem; }
+        .project ul.findings { margin-left: 2rem; }
+        .project ul.findings li { margin-bottom: 1.2rem; }
+        .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 2.4rem; margin: 2rem 0 2rem; }
+        .shots figure { margin: 0; }
+        .shots a { display: block; border: 1px solid #e6e6e6; }
+        .shots img { display: block; width: 100%; height: auto; }
+        .shots figcaption { font-size: 1.4rem; line-height: 1.6; color: #757575; margin-top: .8rem; }
+        .shots figcaption strong { color: #111111; font-family: "montserrat-medium", sans-serif; font-weight: normal; }
+        .project-links { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 4rem; }
+        .project-links .btn { margin: 0; }
+        .project-links .btn--stroke { color: #111111; border-color: #111111; }
+        .project-links .btn--stroke:hover, .project-links .btn--stroke:focus { background: #111111; color: #FFFFFF; }
+        .btn--accent { background: #0CDDDD; border-color: #0CDDDD; color: #000000; }
+        .btn--accent:hover, .btn--accent:focus { background: #0ab8b8; border-color: #0ab8b8; color: #000000; }
+        @media only screen and (max-width: 700px) {
+            .shots { grid-template-columns: 1fr; }
+        }
+        @media only screen and (max-width: 600px) {
+            .project { padding-top: 3rem; }
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <main class="project">
+        <div class="row">
+            <div class="col-full">
+
+                <p class="project-back"><a href="index.html#services">&larr; All projects</a></p>
+
+                <h1>Lorcana Tournament Manager</h1>
+                <p class="lead">A web app I'm building to run my own Disney Lorcana tournaments, from registration to
+                    champion, saving every event to a database for analysis.</p>
+
+                <div class="facts">
+                    <div><h5>Role</h5><p>Product owner, business<br>analyst, developer</p></div>
+                    <div><h5>Tools</h5><p>Python, SQLite, JavaScript,<br>Jira, GitHub, Claude</p></div>
+                    <div><h5>Status</h5><p>v1 built and tested;<br>discovery and pilot next</p></div>
+                </div>
+
+                <div class="demo">
+                    <video id="demo-video" controls preload="none" playsinline poster="images/lorcana-tournament/pairings.png">
+                        <source src="images/lorcana-tournament/live-demo.mp4" type="video/mp4">
+                        Your browser can't play this video.
+                        <a href="images/lorcana-tournament/live-demo.mp4">Download the demo</a> instead.
+                    </video>
+                </div>
+                <p class="caption">Demo: starting round 1, entering best-of-3 results with one tap each, and checking standings
+                    (shown at 3&times; speed).</p>
+
+                <p class="sample-note">Screenshots and demo use fictional sample data: invented players at "Practice Store" events.</p>
+
+                <h2>What it does</h2>
+                <ul class="findings">
+                    <li><strong>Registration:</strong> add players one at a time or paste a list, record each deck's inks,
+                        and handle late arrivals and drops.</li>
+                    <li><strong>Swiss pairings:</strong> players are paired with others on the same points, without rematches,
+                        and byes never go to the same player twice.</li>
+                    <li><strong>Results:</strong> one tap per best-of-3 match; impossible scores are rejected.</li>
+                    <li><strong>Standings:</strong> calculated automatically with standard tiebreakers (OMW%, GW%, OGW%).</li>
+                    <li><strong>Top cut:</strong> a seeded Top 4, 8 or 16 bracket that advances to a champion.</li>
+                    <li><strong>Round timer:</strong> a full-screen countdown for a projector, plus printable pairings and standings.</li>
+                    <li><strong>Undo</strong> for every change, and export or import of a whole event.</li>
+                </ul>
+
+                <h2>Screens</h2>
+                <div class="shots">
+                    <figure>
+                        <a href="images/lorcana-tournament/pairings.png"><img src="images/lorcana-tournament/pairings.png" loading="lazy"
+                            alt="Pairings for round 3: each table shows both players, their points and one-tap score buttons."></a>
+                        <figcaption><strong>Pairings.</strong> One-tap scoring, with winners highlighted and a bye.</figcaption>
+                    </figure>
+                    <figure>
+                        <a href="images/lorcana-tournament/standings.png"><img src="images/lorcana-tournament/standings.png" loading="lazy"
+                            alt="Swiss standings table with points, record and three tiebreaker percentages; the top 8 are marked in gold."></a>
+                        <figcaption><strong>Standings.</strong> Tiebreakers calculated automatically; the Top 8 marked in gold.</figcaption>
+                    </figure>
+                    <figure>
+                        <a href="images/lorcana-tournament/bracket.png"><img src="images/lorcana-tournament/bracket.png" loading="lazy"
+                            alt="Top 8 bracket from quarterfinals through the final to the champion."></a>
+                        <figcaption><strong>Top cut.</strong> Seeded so the top two seeds can only meet in the final.</figcaption>
+                    </figure>
+                    <figure>
+                        <a href="images/lorcana-tournament/deck-inks.png"><img src="images/lorcana-tournament/deck-inks.png" loading="lazy"
+                            alt="Players list with two deck ink selectors per player, records and drop status."></a>
+                        <figcaption><strong>Players.</strong> Optional deck inks feed meta analysis; drops are tracked by round.</figcaption>
+                    </figure>
+                    <figure>
+                        <a href="images/lorcana-tournament/event-list.png"><img src="images/lorcana-tournament/event-list.png" loading="lazy"
+                            alt="List of tournaments at three practice stores, newest first, with dates, player counts and status."></a>
+                        <figcaption><strong>Event history.</strong> Every event is saved to SQLite, newest first.</figcaption>
+                    </figure>
+                    <figure>
+                        <a href="images/lorcana-tournament/projector-timer.png"><img src="images/lorcana-tournament/projector-timer.png" loading="lazy"
+                            alt="Large round countdown timer on a dark background, labeled Final."></a>
+                        <figcaption><strong>Projector timer.</strong> Stays in sync with the organizer's screen.</figcaption>
+                    </figure>
+                </div>
+
+                <h2>How I built it</h2>
+                <ul class="findings">
+                    <li><strong>Planned the work in Jira.</strong> Epics for the product, discovery, data, analytics and learning,
+                        with user stories written with Given/When/Then acceptance criteria.</li>
+                    <li><strong>Built the rules engine in Python.</strong> Pairing, scoring, tiebreakers and the top cut live in one
+                        module with no web or database code, covered by 59 automated tests.</li>
+                    <li><strong>Designed the database.</strong> A normalized SQLite schema (events, people, registrations, rounds,
+                        matches, inks) with constraints that reject impossible scores, plus an entity-relationship diagram.</li>
+                    <li><strong>Prepared user discovery.</strong> A stakeholder map, interview guides for organizers and players,
+                        a player survey and an event observation sheet for measuring time between rounds, to gather requirements
+                        from local store organizers and players, whose experience running events will shape the app.
+                        Interviews are next.</li>
+                    <li><strong>Generated sample data.</strong> A simulator creates realistic fictional events for demos and for
+                        practicing SQL and Tableau before real event data exists.</li>
+                    <li><strong>Worked with AI.</strong> I used Claude, Anthropic's AI assistant, throughout the project: planning,
+                        writing and testing the code, designing the database and building this page.</li>
+                </ul>
+
+                <h2>What's next</h2>
+                <p>Interviews with local store organizers and players and timing a store event as a baseline, then using
+                    the app at my own tournaments to measure whether it shortens the wait between rounds. After that: Tableau
+                    dashboards of attendance and deck trends, and letting players check pairings on their phones.</p>
+
+                <div class="project-links">
+                    <a class="btn btn--accent" href="https://github.com/hmdoor/lorcana-tournament-manager">View the code on GitHub</a>
+                    <a class="btn btn--stroke" href="lorcana-meta.html">Lorcana meta dashboards</a>
+                    <a class="btn btn--stroke" href="index.html#services">All projects</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="js/footer.js"></script>
+    <script>
+        // Play the demo at 3x by default; viewers can still change speed in the player.
+        (function () {
+            var SPEED = 3;
+            var video = document.getElementById('demo-video');
+            video.defaultPlaybackRate = SPEED;
+            video.playbackRate = SPEED;
+            video.addEventListener('loadedmetadata', function () { video.playbackRate = SPEED; });
+        })();
+    </script>
+</body>
+</html>
