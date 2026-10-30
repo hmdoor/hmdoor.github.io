@@ -3628,5 +3628,53 @@ footer .row {
     color: #0CDDDD;
 }
 
+/* "More on GitHub" link under the project cards */
+.projects-more {
+    text-align: center;
+}
+.projects-more a {
+    font-family: "montserrat-medium", sans-serif;
+    font-size: 1.6rem;
+    color: #111111;
+    border-bottom: 2px solid #0CDDDD;
+}
+.projects-more a:hover,
+.projects-more a:focus {
+    color: #0CDDDD;
+}
+
+/* skills section (replaces the old photo shoots section) */
+.s-skills {
+    background-color: #151515;
+    padding-top: 15rem;
+    padding-bottom: 12rem;
+}
+.s-skills .section-header .subhead {
+    color: #0CDDDD;
+}
+.skills-list {
+    margin-top: 6rem;
+}
+.skills__col {
+    padding-bottom: 4rem;
+}
+.skills__col h3 {
+    color: #0CDDDD;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+.skills__col ul {
+    list-style: none;
+    margin-left: 0;
+}
+.skills__col li {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.6rem;
+    line-height: 1.6;
+    padding: .8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 
 /*# sourceMappingURL=main.css.map */
