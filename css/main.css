@@ -3618,5 +3618,15 @@ footer .row {
     }
 }
 
+/* link from a project card to its case-study page */
+.service-text .project-link {
+    color: #111111;
+    border-bottom: 2px solid #0CDDDD;
+}
+.service-text .project-link:hover,
+.service-text .project-link:focus {
+    color: #0CDDDD;
+}
+
 
 /*# sourceMappingURL=main.css.map */

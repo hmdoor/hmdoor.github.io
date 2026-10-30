@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>What Wins at Disney Lorcana's Biggest Tournaments? | Heather Doerschuk</title>
+    <meta name="description" content="A Python and Tableau data project analyzing top-placing decks from 19 Disney Lorcana Challenges, 2024–2026.">
+    <meta name="author" content="Heather Doerschuk">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        /* Project page: reuses the site's fonts and teal accent (#0CDDDD) */
+        .project { background: #FFFFFF; color: #4f4f4f; padding: 6rem 0 9rem; }
+        .project .row { max-width: 900px; }
+        .project-back { font-family: "montserrat-medium", sans-serif; font-size: 1.4rem; text-transform: uppercase; letter-spacing: .2rem; }
+        .project-back a { color: #111111; border-bottom: 2px solid #0CDDDD; }
+        .project h1 { margin-top: 3rem; margin-bottom: 1.2rem; color: #000000; }
+        .project .lead { font-size: 2rem; line-height: 1.6; color: #4f4f4f; margin-bottom: 3rem; }
+        .facts { display: flex; flex-wrap: wrap; gap: 1.2rem 3.6rem; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; padding: 2rem 0; margin-bottom: 4rem; }
+        .facts div { min-width: 14rem; }
+        .facts h5 { margin: 0 0 .4rem; font-size: 1.2rem; letter-spacing: .2rem; text-transform: uppercase; color: #828282; }
+        .facts p { margin: 0; font-family: "montserrat-medium", sans-serif; font-size: 1.6rem; color: #111111; line-height: 1.5; }
+        .viz-wrap { margin: 0 0 1rem; border: 1px solid #e6e6e6; }
+        .viz-wrap tableau-viz { display: block; width: 100%; min-height: 640px; }
+        .caption { font-size: 1.4rem; color: #757575; line-height: 1.6; margin-bottom: 5rem; }
+        .project h2 { color: #000000; margin-top: 4rem; }
+        .project ul.findings { margin-left: 2rem; }
+        .project ul.findings li { margin-bottom: 1.2rem; }
+        .project-links { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 4rem; }
+        .project-links .btn { margin: 0; }
+        .project-links .btn--stroke { color: #111111; border-color: #111111; }
+        .project-links .btn--stroke:hover, .project-links .btn--stroke:focus { background: #111111; color: #FFFFFF; }
+        .btn--accent { background: #0CDDDD; border-color: #0CDDDD; color: #000000; }
+        .btn--accent:hover, .btn--accent:focus { background: #0ab8b8; border-color: #0ab8b8; color: #000000; }
+        @media only screen and (max-width: 900px) {
+            .viz-wrap tableau-viz { min-height: 560px; }
+        }
+        @media only screen and (max-width: 600px) {
+            .project { padding-top: 3rem; }
+            .viz-wrap tableau-viz { min-height: 520px; }
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <main class="project">
+        <div class="row">
+            <div class="col-full">
+
+                <p class="project-back"><a href="index.html#services">&larr; All projects</a></p>
+
+                <h1>What Wins at Disney Lorcana's Biggest Tournaments?</h1>
+                <p class="lead">A data project analyzing top-placing decks from 19 Disney Lorcana Challenges, 2024–2026.</p>
+
+                <div class="facts">
+                    <div><h5>Role</h5><p>Data collection, modeling,<br>analysis, visualization</p></div>
+                    <div><h5>Tools</h5><p>Python, Tableau, Jira, Claude</p></div>
+                    <div><h5>Data</h5><p>73 decklists · 19 events<br>2,741 cards</p></div>
+                </div>
+
+                <div class="viz-wrap">
+                    <tableau-viz id="lorcana-viz"
+                        src="https://public.tableau.com/views/LorcanaChallengeMetaTopCards/Sheet1"
+                        toolbar="bottom" hide-tabs>
+                    </tableau-viz>
+                </div>
+                <p class="caption">Data: top-cut decklists from Disney Lorcana Challenges with 500+ players.
+                    Play rate = share of collected decklists that include the card.</p>
+
+                <h2>Key findings</h2>
+                <ul class="findings">
+                    <li><strong>Ursula – Deceiver</strong> appeared in 40% of top-placing decklists, more than any other card.</li>
+                    <li><strong>Steel</strong> cards held 3 of the 5 most-played spots, including Strength of a Raging Fire (37%).</li>
+                    <li>The most-played cards span four of the six inks, so no single ink dominated the meta.</li>
+                </ul>
+
+                <h2>How I built it</h2>
+                <ul class="findings">
+                    <li><strong>Collected the data.</strong> Tournament results aren't published in one place, so I compiled
+                        73 top-cut decklists from official recaps and community coverage and recorded the source for every one.</li>
+                    <li><strong>Pulled every card.</strong> A Python script downloads all 2,700+ cards from the Lorcast card API.</li>
+                    <li><strong>Matched and cleaned.</strong> A second Python script matches each decklist card to its details
+                        (ink, type, cost and keywords), flags any card it can't match, and outputs clean tables for Tableau.</li>
+                    <li><strong>Visualized.</strong> I built the dashboard in Tableau and published it to Tableau Public.</li>
+                    <li><strong>Managed the work.</strong> I tracked the project as user stories with acceptance criteria in Jira.</li>
+                    <li><strong>Worked with AI.</strong> I used Claude, Anthropic's AI assistant, throughout the project: planning
+                        the data model, writing and debugging the Python scripts, designing the dashboards and building this page.</li>
+                </ul>
+
+                <h2>What's next</h2>
+                <p>This is the first view in a larger dashboard series covering how the meta changed after each set,
+                    deck "personalities," and which Disney franchises see the most play.</p>
+
+                <div class="project-links">
+                    <a class="btn btn--accent" href="https://public.tableau.com/views/LorcanaChallengeMetaTopCards/Sheet1">View on Tableau Public</a>
+                    <a class="btn btn--stroke" href="https://github.com/hmdoor">GitHub</a>
+                    <a class="btn btn--stroke" href="index.html#services">All projects</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+</html>
