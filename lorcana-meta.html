@@ -29,6 +29,13 @@
         .caption { font-size: 1.4rem; color: #757575; line-height: 1.6; margin-bottom: 5rem; }
         .project h2 { color: #000000; margin-top: 4rem; }
         .project ul.findings { margin-left: 2rem; }
+        .table-wrap { overflow-x: auto; margin: 1rem 0 1rem; }
+        .pivot { width: 100%; border-collapse: collapse; font-size: 1.5rem; }
+        .pivot th, .pivot td { padding: .8rem 1.2rem; text-align: right; border-bottom: 1px solid #e6e6e6; white-space: nowrap; }
+        .pivot th:first-child, .pivot td:first-child { text-align: left; }
+        .pivot th { font-family: "montserrat-medium", sans-serif; font-weight: normal; font-size: 1.2rem; letter-spacing: .1rem; text-transform: uppercase; color: #828282; }
+        .pivot td { color: #111111; }
+        .pivot tr.total td { font-family: "montserrat-medium", sans-serif; border-top: 2px solid #0CDDDD; border-bottom: 0; }
         .project ul.findings li { margin-bottom: 1.2rem; }
         .project-links { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 4rem; }
         .project-links .btn { margin: 0; }
@@ -41,6 +48,9 @@
         }
         @media only screen and (max-width: 600px) {
             .project { padding-top: 3rem; }
+            .pivot { font-size: 1.3rem; }
+            .pivot th, .pivot td { padding: .6rem .5rem; }
+            .pivot th { font-size: 1rem; letter-spacing: 0; }
         }
     </style>
 </head>
@@ -58,7 +68,7 @@
 
                 <div class="facts">
                     <div><h5>Role</h5><p>Data collection, modeling,<br>analysis, visualization</p></div>
-                    <div><h5>Tools</h5><p>Python, Tableau, Jira, Claude</p></div>
+                    <div><h5>Tools</h5><p>Python, Tableau, Google Sheets / Excel,<br>Jira, Claude</p></div>
                     <div><h5>Data</h5><p>73 decklists · 19 events<br>2,741 cards</p></div>
                 </div>
 
@@ -81,6 +91,31 @@
                         of them Ursula. The Sword in the Stone (7%) and Sleeping Beauty (6%) follow.</li>
                 </ul>
 
+                <h2>Exploring the data in a spreadsheet</h2>
+                <p>The dashboard shows which cards win. Afterward, I used pivot tables in Google Sheets to ask a
+                    follow-up question: has the <em>kind</em> of card that wins changed over time? It has. In 2025, top
+                    decks leaned almost entirely on characters, while songs and items nearly vanished. Both returned in 2026.</p>
+
+                <div class="table-wrap">
+                    <table class="pivot">
+                        <thead>
+                            <tr><th>Year</th><th>Character</th><th>Song</th><th>Action</th><th>Item</th><th>Location</th><th>Copies</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>2024</td><td>66%</td><td>19%</td><td>5%</td><td>7%</td><td>3%</td><td>2,424</td></tr>
+                            <tr><td>2025</td><td><strong>86%</strong></td><td><strong>7%</strong></td><td>6%</td><td><strong>1%</strong></td><td>0%</td><td>961</td></tr>
+                            <tr><td>2026</td><td>71%</td><td>16%</td><td>8%</td><td>5%</td><td>0%</td><td>1,020</td></tr>
+                            <tr class="total"><td>All</td><td>71%</td><td>16%</td><td>6%</td><td>5%</td><td>1%</td><td>4,405</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="caption">Each row shows how that year's top decks split their cards by type. For example, in 2025,
+                    86% of all cards in those decks were characters.</p>
+
+                <p>The download includes two more pivot tables. One lists the most-played cards across all top-cut decks.
+                    The other narrows it to Top 8 decks only, so you can see whether the very best finishers played
+                    different cards.</p>
+
                 <h2>How I built it</h2>
                 <ul class="findings">
                     <li><strong>Collected the data.</strong> Tournament results aren't published in one place, so I compiled
@@ -91,6 +126,8 @@
                     <li><strong>Mapped every card to a franchise.</strong> Matched each card to its Disney film using card data,
                         flavor text and a franchise lookup table, and fixed dual-ink cards so both colors show.</li>
                     <li><strong>Visualized.</strong> I built the dashboard in Tableau and published it to Tableau Public.</li>
+                    <li><strong>Dug deeper with pivot tables.</strong> After the dashboard, I used Google Sheets to compare card
+                        types by year and the most-played cards in Top 8 decks.</li>
                     <li><strong>Managed the work.</strong> I tracked the project as user stories with acceptance criteria in Jira.</li>
                     <li><strong>Worked with AI.</strong> I used Claude, Anthropic's AI assistant, throughout the project: planning
                         the data model, writing and debugging the Python scripts, designing the dashboards and building this page.</li>
@@ -103,6 +140,7 @@
 
                 <div class="project-links">
                     <a class="btn btn--accent" href="https://public.tableau.com/views/LorcanaChallengeMetaTopCards_17936504848740/Dashboard1">View on Tableau Public</a>
+                    <a class="btn btn--stroke" href="files/Lorcana%20Pivots.xlsx" download>Download the pivot tables (Excel)</a>
                     <a class="btn btn--stroke" href="https://github.com/hmdoor">GitHub</a>
                     <a class="btn btn--stroke" href="index.html#services">All projects</a>
                 </div>
