@@ -25,7 +25,7 @@
         .facts h5 { margin: 0 0 .4rem; font-size: 1.2rem; letter-spacing: .2rem; text-transform: uppercase; color: #828282; }
         .facts p { margin: 0; font-family: "montserrat-medium", sans-serif; font-size: 1.6rem; color: #111111; line-height: 1.5; }
         .viz-wrap { margin: 0 0 1rem; border: 1px solid #e6e6e6; }
-        .viz-wrap tableau-viz { display: block; width: 100%; min-height: 640px; }
+        .viz-wrap tableau-viz { display: block; width: 100%; min-height: 1000px; }
         .caption { font-size: 1.4rem; color: #757575; line-height: 1.6; margin-bottom: 5rem; }
         .project h2 { color: #000000; margin-top: 4rem; }
         .project ul.findings { margin-left: 2rem; }
@@ -37,11 +37,10 @@
         .btn--accent { background: #0CDDDD; border-color: #0CDDDD; color: #000000; }
         .btn--accent:hover, .btn--accent:focus { background: #0ab8b8; border-color: #0ab8b8; color: #000000; }
         @media only screen and (max-width: 900px) {
-            .viz-wrap tableau-viz { min-height: 560px; }
+            .viz-wrap tableau-viz { min-height: 1040px; } /* Tableau's phone layout stacks all three sections */
         }
         @media only screen and (max-width: 600px) {
             .project { padding-top: 3rem; }
-            .viz-wrap tableau-viz { min-height: 520px; }
         }
     </style>
 </head>
@@ -65,18 +64,21 @@
 
                 <div class="viz-wrap">
                     <tableau-viz id="lorcana-viz"
-                        src="https://public.tableau.com/views/LorcanaChallengeMetaTopCards/Sheet1"
+                        src="https://public.tableau.com/views/LorcanaChallengeMetaTopCards_17936504848740/Dashboard1"
                         toolbar="bottom" hide-tabs>
                     </tableau-viz>
                 </div>
                 <p class="caption">Data: top-cut decklists from Disney Lorcana Challenges with 500+ players.
-                    Play rate = share of collected decklists that include the card.</p>
+                    Play rate = share of collected decklists that include the card. Franchise share = share of all
+                    card copies played that come from each Disney franchise.</p>
 
                 <h2>Key findings</h2>
                 <ul class="findings">
                     <li><strong>Ursula – Deceiver</strong> appeared in 40% of top-placing decklists, more than any other card.</li>
                     <li><strong>Steel</strong> cards held 3 of the 5 most-played spots, including Strength of a Raging Fire (37%).</li>
                     <li>The most-played cards span four of the six inks, so no single ink dominated the meta.</li>
+                    <li><strong>The Little Mermaid</strong> is the most-played franchise at 8% of all card copies, about half
+                        of them Ursula. The Sword in the Stone (7%) and Sleeping Beauty (6%) follow.</li>
                 </ul>
 
                 <h2>How I built it</h2>
@@ -86,6 +88,8 @@
                     <li><strong>Pulled every card.</strong> A Python script downloads all 2,700+ cards from the Lorcast card API.</li>
                     <li><strong>Matched and cleaned.</strong> A second Python script matches each decklist card to its details
                         (ink, type, cost and keywords), flags any card it can't match, and outputs clean tables for Tableau.</li>
+                    <li><strong>Mapped every card to a franchise.</strong> Matched each card to its Disney film using card data,
+                        flavor text and a franchise lookup table, and fixed dual-ink cards so both colors show.</li>
                     <li><strong>Visualized.</strong> I built the dashboard in Tableau and published it to Tableau Public.</li>
                     <li><strong>Managed the work.</strong> I tracked the project as user stories with acceptance criteria in Jira.</li>
                     <li><strong>Worked with AI.</strong> I used Claude, Anthropic's AI assistant, throughout the project: planning
@@ -93,11 +97,12 @@
                 </ul>
 
                 <h2>What's next</h2>
-                <p>This is the first view in a larger dashboard series covering how the meta changed after each set,
-                    deck "personalities," and which Disney franchises see the most play.</p>
+                <p>This dashboard covers the most-played cards and the Disney franchises behind them. Next in the series:
+                    how the meta changed after each set, which decks win compared with how often they're played,
+                    deck "personalities," and the most popular keywords.</p>
 
                 <div class="project-links">
-                    <a class="btn btn--accent" href="https://public.tableau.com/views/LorcanaChallengeMetaTopCards/Sheet1">View on Tableau Public</a>
+                    <a class="btn btn--accent" href="https://public.tableau.com/views/LorcanaChallengeMetaTopCards_17936504848740/Dashboard1">View on Tableau Public</a>
                     <a class="btn btn--stroke" href="https://github.com/hmdoor">GitHub</a>
                     <a class="btn btn--stroke" href="index.html#services">All projects</a>
                 </div>
