@@ -3643,6 +3643,53 @@ footer .row {
     color: #0CDDDD;
 }
 
+/* resume section: summary line and two buttons */
+.s-clients {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+}
+.s-clients .section-header {
+    margin-bottom: 2rem;
+}
+.resume-download {
+    text-align: center;
+}
+.resume-download p {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: #4f4f4f;
+    max-width: 640px;
+    margin: 0 auto 4rem;
+}
+.resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.6rem;
+}
+.resume-actions .btn {
+    margin: 0;
+}
+.resume-actions .btn--accent {
+    background: #0CDDDD;
+    border-color: #0CDDDD;
+    color: #000000;
+}
+.resume-actions .btn--accent:hover,
+.resume-actions .btn--accent:focus {
+    background: #0ab8b8;
+    border-color: #0ab8b8;
+}
+.resume-actions .btn--stroke {
+    color: #111111;
+    border-color: #111111;
+}
+.resume-actions .btn--stroke:hover,
+.resume-actions .btn--stroke:focus {
+    background: #111111;
+    color: #FFFFFF;
+}
+
 /* skills section (replaces the old photo shoots section) */
 .s-skills {
     background-color: #151515;
