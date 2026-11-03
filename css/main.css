@@ -3643,6 +3643,31 @@ footer .row {
     color: #0CDDDD;
 }
 
+/* Hero: wide enough for each headline line to fit on one row */
+.home-content__main {
+    max-width: 1250px;
+}
+/* keep the three headline lines separate on phones too (the template hides these breaks) */
+.home-content__main h1 br {
+    display: inline;
+}
+
+/* About text: smaller and left-aligned so it reads like normal paragraphs */
+.about-desc {
+    max-width: 800px;
+}
+.about-desc p {
+    font-size: 1.9rem;
+    line-height: 1.75;
+    text-align: left;
+    margin-bottom: 2.4rem;
+}
+@media only screen and (max-width: 600px) {
+    .about-desc p {
+        font-size: 1.7rem;
+    }
+}
+
 /* resume section: summary line and two buttons */
 .s-clients {
     padding-top: 12rem;
